@@ -7,6 +7,9 @@
 <style>
 :root{--bg:#111318;--card:#1b1f27;--card2:#242a35;--text:#f3f4f6;--muted:#aeb6c2;--accent:#f0b44c;--good:#73d17c;--warn:#f5d36b;--bad:#ef7777;--chip:#303746;--border:#363f50}
 *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,#22293a 0,#111318 35%,#0d0f13 100%);color:var(--text);min-height:100vh} header{padding:28px 18px 16px;max-width:1200px;margin:auto} h1{margin:0 0 8px;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.04em} .subtitle{color:var(--muted);max-width:900px;line-height:1.45} .app{max-width:1200px;margin:auto;padding:0 18px 40px} .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px} .tab{width:auto;padding:10px 16px;border-radius:999px;background:var(--card2);color:var(--text);border:1px solid var(--border)} .tab.active{background:var(--accent);color:#1b1204;border:none} .toolbar{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;background:rgba(27,31,39,.86);border:1px solid var(--border);border-radius:18px;padding:14px;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)} input,select,button{width:100%;border:1px solid var(--border);border-radius:12px;background:#12151b;color:var(--text);padding:11px 12px;font-size:.95rem} button{cursor:pointer;background:var(--accent);color:#1b1204;border:none;font-weight:800} button.secondary{background:var(--card2);color:var(--text);border:1px solid var(--border)} .span4{grid-column:span 4} .span3{grid-column:span 3} .span2{grid-column:span 2} .stats{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0;color:var(--muted)} .stat{background:rgba(36,42,53,.7);border:1px solid var(--border);border-radius:999px;padding:8px 12px} .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px} .card{background:linear-gradient(180deg,rgba(36,42,53,.95),rgba(27,31,39,.98));border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 10px 24px rgba(0,0,0,.22)} .card h2{margin:0 0 8px;font-size:1.12rem} .meta{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0} .chip{background:var(--chip);border:1px solid var(--border);color:var(--muted);border-radius:999px;padding:4px 8px;font-size:.78rem} .good{color:var(--good)} .warn{color:var(--warn)} .section{margin-top:10px;color:var(--muted);font-size:.92rem;line-height:1.4} .section strong{color:var(--text)} .ingredients{margin:8px 0 0;padding-left:18px} .empty{text-align:center;color:var(--muted);padding:50px 10px} details{margin-top:14px} summary{cursor:pointer;color:var(--accent);font-weight:700} .footer-note{color:var(--muted);font-size:.85rem;margin-top:22px;line-height:1.45}
+.cart-panel{background:rgba(27,31,39,.86);border:1px solid var(--border);border-radius:18px;padding:14px;margin:0 0 16px}.cart-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}.cart-title{font-weight:900;font-size:1.05rem}.cart-note{color:var(--muted);font-size:.9rem;margin-top:4px;max-width:680px}.cart-actions{display:flex;gap:8px;flex-wrap:wrap}.cart-actions button{width:auto}.cart-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.cart-pill{display:inline-flex;align-items:center;gap:6px;background:var(--chip);border:1px solid var(--border);border-radius:999px;color:var(--text);padding:6px 8px 6px 12px;font-size:.86rem}.cart-pill button{width:24px;height:24px;border-radius:999px;padding:0;line-height:1;background:#12151b;color:var(--muted);border:1px solid var(--border)}.shopping-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}.shopping-modal.show{display:flex}.shopping-dialog{width:min(760px,100%);max-height:88vh;background:linear-gradient(180deg,rgba(36,42,53,1),rgba(27,31,39,1));border:1px solid var(--border);border-radius:20px;box-shadow:0 18px 60px rgba(0,0,0,.45);padding:16px}.shopping-dialog-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}.shopping-dialog h2{margin:0;font-size:1.2rem}.shopping-dialog-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.shopping-dialog-actions button{width:auto}.shopping-text{width:100%;min-height:420px;max-height:56vh;resize:vertical;background:#f7f4ed;color:#16181d;border:1px solid #d8d2c5;border-radius:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92rem;line-height:1.45;white-space:pre-wrap}.close-modal{width:auto;background:var(--card2)!important;color:var(--text)!important;border:1px solid var(--border)!important}
+@media(max-width:520px){.cart-head{display:block}.cart-actions{margin-top:12px}.shopping-text{min-height:320px}.shopping-dialog-actions button{width:100%}}
+
 @media(max-width:850px){.toolbar{position:static;grid-template-columns:1fr 1fr}.span2,.span3,.span4{grid-column:span 2}} @media(max-width:520px){.toolbar{grid-template-columns:1fr}.span2,.span3,.span4{grid-column:span 1}}
 </style>
 </head>
@@ -2037,6 +2040,452 @@ const meals = [
                   "butter",
                   "crackers"
             ]
+      },
+      {
+            "name": "Chicken Hummus Pitas",
+            "type": "Both",
+            "category": "Middle Eastern",
+            "protein": "Chicken",
+            "method": "Assembly",
+            "cost": 14,
+            "time": 20,
+            "ingredients": 6,
+            "leftovers": "Good",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Chips, fruit, or cucumber slices",
+            "notes": "Light lunch or dinner that feels different without needing many ingredients.",
+            "items": [
+                  "chicken",
+                  "pita",
+                  "hummus",
+                  "cucumber",
+                  "tomato",
+                  "feta"
+            ]
+      },
+      {
+            "name": "Garlic Yogurt Chicken Rice",
+            "type": "Dinner",
+            "category": "Middle Eastern",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 15,
+            "time": 35,
+            "ingredients": 7,
+            "leftovers": "Great",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Cucumber or simple salad",
+            "notes": "Shawarma-adjacent but simpler and mild enough for picky eaters.",
+            "items": [
+                  "chicken thighs",
+                  "rice",
+                  "plain yogurt",
+                  "lemon",
+                  "cucumber",
+                  "garlic sauce",
+                  "pita"
+            ]
+      },
+      {
+            "name": "Turkey Kofta Bowls",
+            "type": "Dinner",
+            "category": "Middle Eastern",
+            "protein": "Ground Turkey",
+            "method": "Oven/Stovetop",
+            "cost": 16,
+            "time": 40,
+            "ingredients": 7,
+            "leftovers": "Great",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Rice or pita",
+            "notes": "A beef-free way to get the kofta vibe using cheaper ground turkey.",
+            "items": [
+                  "ground turkey",
+                  "rice",
+                  "pita",
+                  "cucumber",
+                  "tomato",
+                  "yogurt sauce",
+                  "parsley"
+            ]
+      },
+      {
+            "name": "Chicken Souvlaki Pitas",
+            "type": "Both",
+            "category": "Mediterranean/Greek",
+            "protein": "Chicken",
+            "method": "Oven/Stovetop",
+            "cost": 15,
+            "time": 35,
+            "ingredients": 7,
+            "leftovers": "Good",
+            "kid": "Kid-safe",
+            "season": "Main",
+            "sides": "Fries or fruit",
+            "notes": "Basically Greek chicken wraps; easy to keep mild and customizable.",
+            "items": [
+                  "chicken",
+                  "pita",
+                  "Greek dressing",
+                  "cucumber",
+                  "tomato",
+                  "feta",
+                  "tzatziki"
+            ]
+      },
+      {
+            "name": "Lemon Feta Chicken Pasta",
+            "type": "Dinner",
+            "category": "Mediterranean/Greek",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 16,
+            "time": 30,
+            "ingredients": 7,
+            "leftovers": "Good",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Garlic bread or salad",
+            "notes": "Fresh but filling; less heavy than Alfredo and still satisfying.",
+            "items": [
+                  "chicken",
+                  "pasta",
+                  "lemon",
+                  "feta",
+                  "spinach",
+                  "olive oil",
+                  "parmesan"
+            ]
+      },
+      {
+            "name": "Greek Turkey Burger Pitas",
+            "type": "Dinner",
+            "category": "Mediterranean/Greek",
+            "protein": "Ground Turkey",
+            "method": "Griddle",
+            "cost": 15,
+            "time": 30,
+            "ingredients": 7,
+            "leftovers": "Good",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Fries or cucumber salad",
+            "notes": "Burger-night energy without beef prices.",
+            "items": [
+                  "ground turkey",
+                  "pita",
+                  "feta",
+                  "tzatziki",
+                  "lettuce",
+                  "tomato",
+                  "cucumber"
+            ]
+      },
+      {
+            "name": "Chicken Korma Rice Bowls",
+            "type": "Dinner",
+            "category": "Indian-ish",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 16,
+            "time": 35,
+            "ingredients": 6,
+            "leftovers": "Great",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Naan",
+            "notes": "Milder, creamier curry option that should land better than spicy curries.",
+            "items": [
+                  "chicken",
+                  "rice",
+                  "korma sauce",
+                  "peas",
+                  "naan",
+                  "plain yogurt"
+            ]
+      },
+      {
+            "name": "Coconut Curry Chicken Noodles",
+            "type": "Dinner",
+            "category": "Indian-ish",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 17,
+            "time": 35,
+            "ingredients": 7,
+            "leftovers": "Good",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Cucumber or naan",
+            "notes": "Use a mild simmer sauce to keep ingredient count and heat low.",
+            "items": [
+                  "chicken",
+                  "noodles",
+                  "coconut milk",
+                  "mild curry sauce",
+                  "carrots",
+                  "peas",
+                  "lime"
+            ]
+      },
+      {
+            "name": "Tandoori Chicken Wraps",
+            "type": "Both",
+            "category": "Indian-ish",
+            "protein": "Chicken",
+            "method": "Oven",
+            "cost": 15,
+            "time": 35,
+            "ingredients": 7,
+            "leftovers": "Good",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Chips or fruit",
+            "notes": "Use mild tandoori-style seasoning; wraps make it less intimidating.",
+            "items": [
+                  "chicken",
+                  "tortillas",
+                  "plain yogurt",
+                  "tandoori seasoning",
+                  "lettuce",
+                  "cucumber",
+                  "naan"
+            ]
+      },
+      {
+            "name": "Chicken Jambalaya Rice Skillet",
+            "type": "Dinner",
+            "category": "Cajun/Southern",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 15,
+            "time": 40,
+            "ingredients": 7,
+            "leftovers": "Great",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Cornbread",
+            "notes": "Keep it mild and skip seafood; rice stretches it well.",
+            "items": [
+                  "chicken",
+                  "rice",
+                  "smoked sausage",
+                  "bell pepper",
+                  "onion",
+                  "Cajun seasoning",
+                  "broth"
+            ]
+      },
+      {
+            "name": "Mild Cajun Chicken Sandwiches",
+            "type": "Both",
+            "category": "Cajun/Southern",
+            "protein": "Chicken",
+            "method": "Griddle",
+            "cost": 14,
+            "time": 25,
+            "ingredients": 6,
+            "leftovers": "Good",
+            "kid": "Kid-safe",
+            "season": "Main",
+            "sides": "Fries or slaw",
+            "notes": "A low-spice version gives flavor without making dinner a fight.",
+            "items": [
+                  "chicken",
+                  "buns",
+                  "mild Cajun seasoning",
+                  "lettuce",
+                  "mayo",
+                  "pickles"
+            ]
+      },
+      {
+            "name": "Chicken Biscuit Sliders",
+            "type": "Both",
+            "category": "Cajun/Southern",
+            "protein": "Chicken",
+            "method": "Oven",
+            "cost": 13,
+            "time": 25,
+            "ingredients": 5,
+            "leftovers": "Good",
+            "kid": "Kid-safe",
+            "season": "Main",
+            "sides": "Fruit or fries",
+            "notes": "Cheap, easy, and very kid-friendly while still feeling like comfort food.",
+            "items": [
+                  "chicken tenders",
+                  "biscuits",
+                  "honey",
+                  "pickles",
+                  "cheese"
+            ]
+      },
+      {
+            "name": "Turkey Pierogi Skillet",
+            "type": "Dinner",
+            "category": "German/Eastern European",
+            "protein": "Ground Turkey",
+            "method": "Stovetop",
+            "cost": 15,
+            "time": 30,
+            "ingredients": 6,
+            "leftovers": "Good",
+            "kid": "Kid-safe",
+            "season": "Main",
+            "sides": "Applesauce or green beans",
+            "notes": "Pierogi night with a little protein added; not casserole-looking.",
+            "items": [
+                  "pierogi",
+                  "ground turkey",
+                  "onion",
+                  "sour cream",
+                  "cheese",
+                  "green beans"
+            ]
+      },
+      {
+            "name": "Chicken Paprika Bowls",
+            "type": "Dinner",
+            "category": "German/Eastern European",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 15,
+            "time": 40,
+            "ingredients": 7,
+            "leftovers": "Great",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Egg noodles",
+            "notes": "Paprikash-inspired but simplified and mild.",
+            "items": [
+                  "chicken",
+                  "egg noodles",
+                  "paprika",
+                  "sour cream",
+                  "broth",
+                  "onion",
+                  "peas"
+            ]
+      },
+      {
+            "name": "Croque Monsieur Sandwiches",
+            "type": "Lunch",
+            "category": "French-ish",
+            "protein": "Ham/Pork",
+            "method": "Oven/Griddle",
+            "cost": 13,
+            "time": 25,
+            "ingredients": 6,
+            "leftovers": "Okay",
+            "kid": "Kid-safe",
+            "season": "Main",
+            "sides": "Fruit or salad",
+            "notes": "Fancy grilled ham and cheese without a lot of work.",
+            "items": [
+                  "bread",
+                  "ham",
+                  "Swiss cheese",
+                  "Dijon mustard",
+                  "butter",
+                  "milk"
+            ]
+      },
+      {
+            "name": "Chicken Dijon Rice",
+            "type": "Dinner",
+            "category": "French-ish",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 15,
+            "time": 35,
+            "ingredients": 6,
+            "leftovers": "Good",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Green beans",
+            "notes": "Simple creamy mustard chicken; feels restaurant-ish but cheap.",
+            "items": [
+                  "chicken",
+                  "rice",
+                  "Dijon mustard",
+                  "cream",
+                  "broth",
+                  "green beans"
+            ]
+      },
+      {
+            "name": "Cuban Chicken Rice Bowls",
+            "type": "Dinner",
+            "category": "Caribbean/Cuban",
+            "protein": "Chicken",
+            "method": "Stovetop",
+            "cost": 15,
+            "time": 35,
+            "ingredients": 7,
+            "leftovers": "Great",
+            "kid": "Middle ground",
+            "season": "Main",
+            "sides": "Plantain chips or fruit",
+            "notes": "Mojo flavor without needing pork every time.",
+            "items": [
+                  "chicken",
+                  "rice",
+                  "black beans",
+                  "orange juice",
+                  "lime",
+                  "onion",
+                  "sour cream"
+            ]
+      },
+      {
+            "name": "Turkey Cubano Wraps",
+            "type": "Lunch",
+            "category": "Caribbean/Cuban",
+            "protein": "Turkey",
+            "method": "Griddle",
+            "cost": 13,
+            "time": 20,
+            "ingredients": 6,
+            "leftovers": "Okay",
+            "kid": "Kid-safe",
+            "season": "Main",
+            "sides": "Chips or fruit",
+            "notes": "Cubano-ish flavor using deli turkey and ham instead of a big pork cook.",
+            "items": [
+                  "tortillas",
+                  "deli turkey",
+                  "ham",
+                  "Swiss cheese",
+                  "pickles",
+                  "mustard"
+            ]
+      },
+      {
+            "name": "Apple Turkey Cheddar Sandwiches",
+            "type": "Lunch",
+            "category": "Lunch Sandwiches",
+            "protein": "Turkey",
+            "method": "Assembly",
+            "cost": 12,
+            "time": 15,
+            "ingredients": 6,
+            "leftovers": "Okay",
+            "kid": "Kid-safe",
+            "season": "Main",
+            "sides": "Chips or carrots",
+            "notes": "Light, cheap, and a little different from basic deli sandwiches.",
+            "items": [
+                  "bread",
+                  "deli turkey",
+                  "cheddar",
+                  "apple",
+                  "mayo",
+                  "lettuce"
+            ]
       }
 ];
 let activeType = 'all';
@@ -2048,7 +2497,19 @@ function costLabel(cost){return cost<=13?'Lowest cost':cost<=15?'Under ~$15':'Un
 function typePass(m){if(activeType==='all') return true; if(activeType==='dinner') return m.type==='Dinner'||m.type==='Both'; if(activeType==='lunch') return m.type==='Lunch'||m.type==='Both';}
 function passes(m){if(!typePass(m))return false; const q=els.search.value.trim().toLowerCase(); const hay=[m.name,m.type,m.category,m.protein,m.method,m.notes,m.sides,...(m.items||[])].join(' ').toLowerCase(); if(q&&!hay.includes(q))return false; if(els.category.value&&m.category!==els.category.value)return false; if(els.protein.value&&m.protein!==els.protein.value)return false; if(els.method.value&&m.method!==els.method.value)return false; if(els.cost.value==='low'&&m.cost>13)return false; if(els.cost.value==='under15'&&m.cost>15)return false; if(els.cost.value==='under20'&&m.cost>20)return false; if(els.time.value==='quick'&&m.time>30)return false; if(els.time.value==='medium'&&(m.time<=30||m.time>50))return false; if(els.time.value==='long'&&m.time<=50)return false; if(els.ingredients.value==='simple'&&m.ingredients>7)return false; if(els.ingredients.value==='bigger'&&m.ingredients<=7)return false; if(els.leftovers.value==='great'&&m.leftovers!=='Great')return false; if(els.leftovers.value==='good'&&!['Good','Great'].includes(m.leftovers))return false; if(els.kid.value==='safe'&&m.kid!=='Kid-safe')return false; if(els.kid.value==='middle'&&m.kid!=='Middle ground')return false; if(els.kid.value==='adventurous'&&m.kid!=='Adventurous')return false; if(els.season.value==='main'&&m.season!=='Main')return false; if(els.season.value==='soup'&&m.season!=='Soup')return false; return true;}
 function slugify(name){return name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}
-function card(m){const id=slugify(m.name); const selected=selectedMeals.has(m.name); const maxed=!selected&&selectedMeals.size>=MAX_CART; return `<article class="card"><div class="card-top"><h2>${m.name}</h2><button class="cart-btn ${selected?'selected':''}" data-meal="${encodeURIComponent(m.name)}" ${maxed?'disabled':''}>${selected?'Selected':'Add'}</button></div><div class="meta"><span class="chip">${m.type}</span><span class="chip">${m.category}</span><span class="chip">${m.protein}</span><span class="chip">${m.method}</span><span class="chip">${costLabel(m.cost)}</span><span class="chip">${timeLabel(m.time)}</span><span class="chip ${ingredientClass(m.ingredients)}">${m.ingredients} ingredients</span><span class="chip">${m.leftovers} leftovers</span><span class="chip">${m.kid}</span></div><div class="section"><strong>Estimated cost:</strong> ~$${m.cost}</div><div class="section"><strong>Time:</strong> ${m.time>120?'Crockpot / mostly hands-off':m.time+' min'}</div><div class="section"><strong>Side idea:</strong> ${m.sides}</div><div class="section"><strong>Why it fits:</strong> ${m.notes}</div><details><summary>Core ingredients</summary><ul class="ingredients">${(m.items||[]).map(i=>`<li>${i}</li>`).join('')}</ul></details></article>`}
+function quickInstructions(m){
+  const method=(m.method||'').toLowerCase();
+  const cat=(m.category||'').toLowerCase();
+  const type=(m.type||'').toLowerCase();
+  if(type==='lunch' || method.includes('assembly')) return 'Prep the ingredients, layer everything so wet items stay away from bread/tortillas until serving, and pack sauces separately if saving leftovers.';
+  if(method.includes('crockpot')) return 'Add the main protein, sauce/broth, and sturdy vegetables to the crockpot. Cook until tender, shred or slice if needed, then serve with the listed side.';
+  if(method.includes('oven')) return 'Season or sauce the protein, bake on a sheet pan or shallow dish until cooked through, then assemble with the listed toppings or side.';
+  if(method.includes('griddle')) return 'Cook the protein or sandwiches on the griddle until browned and cooked through, then add fresh toppings right before serving.';
+  if(cat.includes('pasta')) return 'Cook pasta while the protein or sauce comes together, then toss everything together and loosen with a splash of pasta water if needed.';
+  if(cat.includes('asian') || cat.includes('rice') || m.items?.some(i=>i.toLowerCase().includes('rice'))) return 'Start the rice first, cook the protein and vegetables with the sauce, then serve bowl-style so everyone can customize toppings.';
+  return 'Cook the protein first, warm or prep the base, then combine with sauce/toppings and serve with the suggested side.';
+}
+function card(m){const id=slugify(m.name); const selected=selectedMeals.has(m.name); const maxed=!selected&&selectedMeals.size>=MAX_CART; return `<article class="card"><div class="card-top"><h2>${m.name}</h2><button class="cart-btn ${selected?'selected':''}" data-meal="${encodeURIComponent(m.name)}" ${maxed?'disabled':''}>${selected?'Selected':'Add'}</button></div><div class="meta"><span class="chip">${m.type}</span><span class="chip">${m.category}</span><span class="chip">${m.protein}</span><span class="chip">${m.method}</span><span class="chip">${costLabel(m.cost)}</span><span class="chip">${timeLabel(m.time)}</span><span class="chip ${ingredientClass(m.ingredients)}">${m.ingredients} ingredients</span><span class="chip">${m.leftovers} leftovers</span><span class="chip">${m.kid}</span></div><div class="section"><strong>Estimated cost:</strong> ~$${m.cost}</div><div class="section"><strong>Time:</strong> ${m.time>120?'Crockpot / mostly hands-off':m.time+' min'}</div><div class="section"><strong>Side idea:</strong> ${m.sides}</div><div class="section"><strong>Why it fits:</strong> ${m.notes}</div><details><summary>Core ingredients + quick instructions</summary><ul class="ingredients">${(m.items||[]).map(i=>`<li>${i}</li>`).join('')}</ul><div class="section"><strong>Quick instructions:</strong> ${quickInstructions(m)}</div></details></article>`}
 function render(list=null, randomized=false){const visible=Array.isArray(list)?list:meals.filter(passes); els.stats.innerHTML=`<span class="stat">Showing ${visible.length} of ${meals.length}</span><span class="stat">Dinners: ${visible.filter(m=>m.type==='Dinner'||m.type==='Both').length}</span><span class="stat">Lunches: ${visible.filter(m=>m.type==='Lunch'||m.type==='Both').length}</span><span class="stat">Simple ≤7 ingredients: ${visible.filter(m=>m.ingredients<=7).length}</span><span class="stat">Great leftovers: ${visible.filter(m=>m.leftovers==='Great').length}</span><span class="stat">Cart: ${selectedMeals.size}/${MAX_CART}</span>${randomized?'<span class="stat">Randomized order</span>':''}`; renderCart(); if(!visible.length){els.grid.innerHTML='<div class="empty">No meals match those filters. Loosen one filter or hit reset.</div>';return} els.grid.innerHTML=visible.map(card).join(''); bindCartButtons();}
 function bindCartButtons(){document.querySelectorAll('.cart-btn').forEach(btn=>btn.addEventListener('click',()=>toggleMeal(decodeURIComponent(btn.dataset.meal))))}
 function toggleMeal(name){if(selectedMeals.has(name)){selectedMeals.delete(name)}else{if(selectedMeals.size>=MAX_CART){alert(`Meal cart is capped at ${MAX_CART}. Remove one before adding another.`);return} selectedMeals.add(name)} render();}
@@ -2056,7 +2517,11 @@ function removeMeal(name){selectedMeals.delete(name); render();}
 function clearCart(){selectedMeals.clear(); render();}
 function categorizeItem(item){const x=item.toLowerCase(); if(/chicken|pork|ham|turkey|sausage|egg|tuna/.test(x)) return 'Protein'; if(/lettuce|romaine|spinach|tomato|onion|pepper|broccoli|cucumber|carrot|celery|potato|cabbage|corn|avocado|lime|lemon|cilantro|parsley|greens|apple|fruit/.test(x)) return 'Produce'; if(/cheese|milk|cream|yogurt|feta|parmesan|mozzarella|sour cream|butter/.test(x)) return 'Dairy'; if(/bread|bun|roll|tortilla|pita|naan|bagel|croissant/.test(x)) return 'Bread/Bakery'; if(/rice|pasta|noodle|beans|sauce|dressing|broth|flour|breadcrumbs|croutons|crackers|seasoning|spices|honey|mustard|mayo|teriyaki|soy|bbq|salsa|gravy|oil/.test(x)) return 'Pantry'; return 'Other';}
 function buildShoppingText(){const chosen=meals.filter(m=>selectedMeals.has(m.name)); if(!chosen.length) return 'Select 1–8 meals first, then generate the shopping list.'; const map=new Map(); chosen.forEach(m=>(m.items||[]).forEach(raw=>{const key=raw.toLowerCase().trim().replace(/[^a-z0-9 /+-]/g,''); if(!map.has(key)) map.set(key,{label:raw,count:0,meals:[]}); const entry=map.get(key); entry.count++; entry.meals.push(m.name);})); const groups={}; [...map.values()].sort((a,b)=>a.label.localeCompare(b.label)).forEach(entry=>{const group=categorizeItem(entry.label); (groups[group] ||= []).push(entry);}); let out=`Shopping List (${chosen.length} meal${chosen.length===1?'':'s'})\n`; out+=`Meals: ${chosen.map(m=>m.name).join(' | ')}\n\n`; ['Protein','Produce','Dairy','Bread/Bakery','Pantry','Other'].forEach(group=>{if(groups[group]?.length){out+=`${group}\n`; groups[group].forEach(e=>{out+=`☐ ${e.label}${e.count>1?` (${e.count} meals)`:''}\n`}); out+='\n';}}); out+='Pantry basics assumed: salt, pepper, oil, basic garlic/onion powder, and common seasonings.\n'; return out;}
-function renderCart(){const chosen=[...selectedMeals]; const output=document.getElementById('shoppingText'); const hasOutput=output&&output.closest('.shopping-output')?.classList.contains('show'); els.cartPanel.innerHTML=`<div class="cart-head"><div><div class="cart-title">Meal Cart (${selectedMeals.size}/${MAX_CART})</div><div class="cart-note">Pick up to ${MAX_CART} meals, then export a merged shopping list. Repeated ingredients show as “2 meals,” “3 meals,” etc.</div></div><div class="cart-actions"><button class="secondary" id="generateListBtn" ${selectedMeals.size?'':'disabled'}>Generate List</button><button class="secondary" id="copyListBtn" ${selectedMeals.size?'':'disabled'}>Copy</button><button class="secondary" id="downloadListBtn" ${selectedMeals.size?'':'disabled'}>Download .txt</button><button class="secondary" id="clearCartBtn" ${selectedMeals.size?'':'disabled'}>Clear</button></div></div><div class="cart-list">${chosen.length?chosen.map(name=>`<span class="cart-pill">${name}<button title="Remove" data-remove="${encodeURIComponent(name)}">×</button></span>`).join(''):'<span class="cart-note">No meals selected yet.</span>'}</div><div class="shopping-output ${hasOutput?'show':''}" id="shoppingOutput"><textarea id="shoppingText" readonly>${hasOutput?buildShoppingText():''}</textarea></div>`; document.querySelectorAll('[data-remove]').forEach(btn=>btn.addEventListener('click',()=>removeMeal(decodeURIComponent(btn.dataset.remove)))); document.getElementById('clearCartBtn')?.addEventListener('click',clearCart); document.getElementById('generateListBtn')?.addEventListener('click',()=>{document.getElementById('shoppingOutput').classList.add('show');document.getElementById('shoppingText').value=buildShoppingText();}); document.getElementById('copyListBtn')?.addEventListener('click',async()=>{const text=buildShoppingText(); document.getElementById('shoppingOutput').classList.add('show');document.getElementById('shoppingText').value=text; try{await navigator.clipboard.writeText(text); alert('Shopping list copied.')}catch(e){document.getElementById('shoppingText').select(); document.execCommand('copy');}}); document.getElementById('downloadListBtn')?.addEventListener('click',()=>{const blob=new Blob([buildShoppingText()],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='shopping-list.txt'; a.click(); URL.revokeObjectURL(a.href);});}
+function renderCart(){const chosen=[...selectedMeals]; els.cartPanel.innerHTML=`<div class="cart-head"><div><div class="cart-title">Meal Cart (${selectedMeals.size}/${MAX_CART})</div><div class="cart-note">Pick up to ${MAX_CART} meals, then generate a merged shopping list. Repeated ingredients show as “2 meals,” “3 meals,” etc.</div></div><div class="cart-actions"><button class="secondary" id="generateListBtn" ${selectedMeals.size?'':'disabled'}>Generate List</button><button class="secondary" id="clearCartBtn" ${selectedMeals.size?'':'disabled'}>Clear</button></div></div><div class="cart-list">${chosen.length?chosen.map(name=>`<span class="cart-pill">${name}<button title="Remove" data-remove="${encodeURIComponent(name)}">×</button></span>`).join(''):'<span class="cart-note">No meals selected yet.</span>'}</div><div class="shopping-modal" id="shoppingModal" aria-hidden="true"><div class="shopping-dialog"><div class="shopping-dialog-head"><h2>Shopping List</h2><button class="close-modal" id="closeShoppingModal" type="button">Close</button></div><textarea class="shopping-text" id="shoppingText" readonly></textarea><div class="shopping-dialog-actions"><button id="copyListBtn" type="button">Copy List</button><button class="secondary" id="downloadListBtn" type="button">Download .txt</button></div></div></div>`; document.querySelectorAll('[data-remove]').forEach(btn=>btn.addEventListener('click',()=>removeMeal(decodeURIComponent(btn.dataset.remove)))); document.getElementById('clearCartBtn')?.addEventListener('click',clearCart); document.getElementById('generateListBtn')?.addEventListener('click',openShoppingModal); document.getElementById('closeShoppingModal')?.addEventListener('click',closeShoppingModal); document.getElementById('shoppingModal')?.addEventListener('click',e=>{if(e.target.id==='shoppingModal') closeShoppingModal();}); document.getElementById('copyListBtn')?.addEventListener('click',copyShoppingList); document.getElementById('downloadListBtn')?.addEventListener('click',downloadShoppingList);}
+function openShoppingModal(){const modal=document.getElementById('shoppingModal'); const text=document.getElementById('shoppingText'); if(!modal||!text) return; text.value=buildShoppingText(); modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); setTimeout(()=>text.focus(),0);}
+function closeShoppingModal(){const modal=document.getElementById('shoppingModal'); if(!modal) return; modal.classList.remove('show'); modal.setAttribute('aria-hidden','true');}
+async function copyShoppingList(){const text=buildShoppingText(); const box=document.getElementById('shoppingText'); if(box) box.value=text; try{await navigator.clipboard.writeText(text); alert('Shopping list copied.')}catch(e){if(box){box.focus();box.select();document.execCommand('copy');}}}
+function downloadShoppingList(){const blob=new Blob([buildShoppingText()],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='shopping-list.txt'; a.click(); URL.revokeObjectURL(a.href);}
 function shuffleVisible(){const visible=meals.filter(passes); for(let i=visible.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[visible[i],visible[j]]=[visible[j],visible[i]]} render(visible,true)}
 document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeType=btn.dataset.type;render();})); Object.values(els).forEach(el=>{if(el&&['INPUT','SELECT'].includes(el.tagName)){el.addEventListener('input',()=>render());el.addEventListener('change',()=>render());}}); els.randomBtn.addEventListener('click',shuffleVisible); els.resetBtn.addEventListener('click',()=>{['search','category','protein','method','cost','time','ingredients','leftovers','kid'].forEach(k=>els[k].value='');els.season.value='main';activeType='all';document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.type==='all'));render();}); render();
 </script>
